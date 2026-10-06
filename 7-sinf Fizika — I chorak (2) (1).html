@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>7-sinf Fizika — I chorak</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#141829; --bg-2:#1c2138; --panel:#1f253f; --panel-2:#262d4c;
+  --ink:#EDE8DC; --dim:#B9B6C8; --line:#363c5c;
+  --amber:#F2A93B; --teal:#59D6C4; --teal-deep:#2F9E8F; --danger:#E8735F;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+*{box-sizing:border-box}
+body{margin:0;min-height:100%;background:var(--bg);
+  background-image:radial-gradient(circle at 10% 0%,rgba(89,214,196,.08),transparent 40%),radial-gradient(circle at 90% 10%,rgba(242,169,59,.1),transparent 45%);
+  color:var(--ink);font-family:'Manrope',sans-serif;line-height:1.6}
+h1,h2{font-family:'Fraunces',serif;font-weight:600;margin:0 0 .4em;color:#FBF7EE}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px 80px}
+.hero{padding:48px 20px 36px;border-bottom:1px solid var(--line)}
+.hero .kicker{color:var(--teal);font-family:'Fraunces',serif;font-style:italic;margin-bottom:8px}
+.hero h1{font-size:clamp(1.8rem,6vw,2.6rem)}
+.hero p{color:var(--dim);max-width:46ch}
+section{padding:38px 0;border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:none}
+.num{font-family:'Fraunces',serif;font-style:italic;color:var(--dim);font-size:.9rem;margin-bottom:4px}
+section h2{font-size:clamp(1.25rem,4vw,1.6rem)}
+.lead{color:var(--dim);max-width:62ch;font-size:.98rem}
+.term{background:rgba(242,169,59,.14);border-bottom:2px solid var(--amber);color:#FBF7EE;padding:0 3px;border-radius:3px;font-weight:600}
+.term.c{background:rgba(89,214,196,.14);border-bottom:2px solid var(--teal)}
+.example-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:14px 0 4px}
+.example{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:.88rem;color:var(--dim)}
+.example strong{color:var(--ink);display:block;font-size:.9rem;margin-bottom:2px}
+.sim{margin-top:18px;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.sim-head{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line);background:var(--panel-2);font-size:.82rem;color:var(--dim)}
+.sim-head strong{color:var(--ink);font-size:.88rem}
+.sim-body{padding:16px}
+.chip-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.chip{font-family:'Manrope',sans-serif;font-weight:600;font-size:.82rem;padding:8px 13px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--dim);cursor:pointer;transition:.15s}
+.chip:hover{border-color:var(--teal);color:var(--ink)}
+.chip.active{background:var(--teal);border-color:var(--teal);color:#04211d}
+.detail{background:var(--bg-2);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-size:.92rem;color:var(--dim);min-height:60px}
+.detail b{color:#FBF7EE}
+.scn{background:var(--bg-2);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:10px}
+.scn p{margin:0 0 10px;font-size:.92rem;color:var(--ink)}
+.scn .btns{display:flex;gap:8px}
+.scn button{font-family:'Manrope',sans-serif;font-weight:700;font-size:.82rem;padding:7px 14px;border-radius:7px;border:1px solid var(--line);background:transparent;color:var(--dim);cursor:pointer}
+.scn button.yes{border-color:var(--teal-deep)}
+.scn button.no{border-color:var(--danger)}
+.scn .fb{display:none;margin-top:8px;font-size:.85rem;padding:8px 10px;border-radius:8px}
+.scn .fb.ok{background:rgba(89,214,196,.15);color:var(--teal);display:block}
+.scn .fb.bad{background:rgba(232,115,95,.15);color:var(--danger);display:block}
+.toggle-row{display:flex;gap:8px;margin-bottom:12px}
+.toggle-row button{flex:1;font-family:'Manrope',sans-serif;font-weight:700;font-size:.82rem;padding:9px;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--dim);cursor:pointer}
+.toggle-row button.active{background:var(--amber);border-color:var(--amber);color:#1a1204}
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.match-col{display:flex;flex-direction:column;gap:8px}
+.match-item{font-family:'Manrope',sans-serif;font-weight:600;font-size:.85rem;padding:9px 12px;border-radius:8px;border:1px solid var(--line);background:var(--bg-2);color:var(--dim);cursor:pointer;text-align:center}
+.match-item.sel{border-color:var(--amber);color:var(--ink)}
+.match-item.ok{border-color:var(--teal);background:rgba(89,214,196,.15);color:var(--teal);cursor:default}
+.ruler-wrap{padding:30px 10px 10px}
+.ruler-track{position:relative;height:40px;background:repeating-linear-gradient(90deg,var(--line) 0 1px,transparent 1px 20px),var(--bg-2);border:1px solid var(--line);border-radius:6px}
+.ruler-marker{position:absolute;top:-24px;width:2px;height:64px;background:var(--amber)}
+.ruler-marker::after{content:attr(data-v);position:absolute;top:-20px;left:-16px;width:36px;text-align:center;font-size:.78rem;color:var(--amber);font-weight:700}
+.ruler-obj{position:absolute;left:0;top:10px;height:20px;background:var(--teal);opacity:.35;border-radius:3px 0 0 3px}
+#lenSlider{width:100%;margin-top:14px;accent-color:var(--amber)}
+.grid-wrap{display:grid;grid-template-columns:repeat(10,1fr);gap:3px;max-width:420px;margin:0 auto 10px}
+.cell{aspect-ratio:1;background:var(--bg-2);border:1px solid var(--line);border-radius:3px;cursor:pointer}
+.cell.on{background:var(--teal);border-color:var(--teal)}
+.area-stat{text-align:center;font-size:.95rem;color:var(--dim);margin-bottom:10px}
+.area-stat b{color:var(--amber);font-size:1.1rem}
+.quiz-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px}
+.quiz-card p.q{font-weight:700;color:#FBF7EE;margin:0 0 8px;font-size:.92rem}
+.opt{display:block;width:100%;text-align:left;background:var(--bg-2);border:1px solid var(--line);color:var(--ink);padding:8px 12px;border-radius:7px;margin-bottom:6px;cursor:pointer;font-size:.86rem}
+.opt:hover{border-color:var(--teal)}
+.opt.correct{background:rgba(89,214,196,.18);border-color:var(--teal)}
+.opt.wrong{background:rgba(232,115,95,.16);border-color:var(--danger)}
+footer{text-align:center;color:var(--dim);font-size:.82rem;padding:36px 20px 10px}
+@media(max-width:480px){.match-grid{gap:10px}.grid-wrap{grid-template-columns:repeat(8,1fr)}}
+</style>
+</head>
+<body>
+<div class="hero"><div class="wrap" style="padding:0">
+  <div class="kicker">7-sinf · Fizika · I chorak</div>
+  <h1>Fizika fanini kashf etish yo'li</h1>
+  <p>Fizik hodisalardan tortib o'lchash qoidalarigacha — chorak davomida o'rganiladigan 11 ta mavzu, har biri jonli misol va interaktiv mashq bilan.</p>
+</div></div>
+<div class="wrap">
+
+<section><div class="num">1-mavzu</div><h2>Fizika fani nimani o'rganadi? Fizik hodisalar</h2>
+<p class="lead">Jismning holati yoki shakli o'zgarishi bilan boradigan, lekin moddani boshqa moddaga aylantirmaydigan jarayon <span class="term">fizik hodisa</span> deyiladi.</p>
+<div class="sim"><div class="sim-head"><strong>Hodisa turlari</strong><span>Bosib ko'ring</span></div><div class="sim-body">
+<div class="chip-row" id="g1"></div><div class="detail" id="g1d"></div>
+</div></div></section>
+
+<section><div class="num">2-mavzu</div><h2>Fizika fanini o'rganishdagi muhim tamoyillar</h2>
+<p class="lead">Ilmiy bilim <span class="term c">ilmiy metod</span> orqali — kuzatish, taxmin, tajriba va xulosa bosqichlari orqali — shakllanadi.</p>
+<div class="sim"><div class="sim-head"><strong>Ilmiy metod bosqichlari</strong><span>Bosib ko'ring</span></div><div class="sim-body">
+<div class="chip-row" id="g2"></div><div class="detail" id="g2d"></div>
+</div></div></section>
+
+<section><div class="num">3-mavzu</div><h2>Fizika fanini o'rganishda qanday ko'nikmalarga ega bo'lish kerak?</h2>
+<p class="lead">Fizikani puxta o'rganish uchun <span class="term">kuzatish</span>, <span class="term">o'lchash</span>, <span class="term">hisoblash</span> va <span class="term">tahlil qilish</span> ko'nikmalari zarur.</p>
+<div class="sim"><div class="sim-head"><strong>Zarur ko'nikmalar</strong><span>Bosib ko'ring</span></div><div class="sim-body">
+<div class="chip-row" id="g3"></div><div class="detail" id="g3d"></div>
+</div></div></section>
+
+<section><div class="num">4-mavzu</div><h2>Laboratoriya jihozlari va qurilmalar</h2>
+<p class="lead">Har bir asbob ma'lum bir <span class="term c">fizik kattalik</span>ni o'lchash uchun mo'ljallangan.</p>
+<div class="sim"><div class="sim-head"><strong>Asboblar</strong><span>Bosib ko'ring</span></div><div class="sim-body">
+<div class="chip-row" id="g4"></div><div class="detail" id="g4d"></div>
+</div></div></section>
+
+<section><div class="num">5-mavzu</div><h2>Fizika laboratoriya xonasida texnika xavfsizligi qoidalari</h2>
+<p class="lead">Laboratoriyada ishlashdan oldin <span class="term">xavfsizlik qoidalari</span>ga rioya qilish shart. Har bir vaziyat uchun to'g'ri yoki noto'g'ri ekanini tanlang.</p>
+<div class="sim"><div class="sim-head"><strong>To'g'rimi yoki noto'g'rimi?</strong><span>Tanlang</span></div><div class="sim-body" id="scnWrap"></div></div>
+</section>
+
+<section><div class="num">6-mavzu</div><h2>Fizika va texnologiya</h2>
+<p class="lead">Fizika kashfiyotlari zamonaviy <span class="term c">texnologiya</span>larning asosini tashkil etadi.</p>
+<div class="sim"><div class="sim-head"><strong>Kashfiyot → Texnologiya</strong><span>Bosib ko'ring</span></div><div class="sim-body">
+<div class="chip-row" id="g6"></div><div class="detail" id="g6d"></div>
+</div></div></section>
+
+<section><div class="num">7-mavzu</div><h2>Nima uchun o'lchashlarni amalga oshirish kerak?</h2>
+<p class="lead">Ko'z bilan baholash har doim ham aniq emas — <span class="term">aniq o'lchov</span> faqat asbob yordamida olinadi.</p>
+<div class="sim"><div class="sim-head"><strong>Taqqoslang</strong><span>Rejimni tanlang</span></div><div class="sim-body">
+<div class="toggle-row"><button class="active" data-m="0">Ko'z bilan baholash</button><button data-m="1">Asbob bilan o'lchash</button></div>
+<div class="detail" id="g7d"></div>
+</div></div></section>
+
+<section><div class="num">8-mavzu</div><h2>Fizik kattaliklar va Xalqaro birliklar sistemasi (XBS)</h2>
+<p class="lead">Har bir <span class="term">kattalik</span>ning o'z <span class="term">o'lchov birligi</span> bor. Mos juftlikni toping.</p>
+<div class="sim"><div class="sim-head"><strong>Juftlikni toping</strong><span id="matchStat">0 / 4</span></div><div class="sim-body">
+<div class="match-grid"><div class="match-col" id="matchL"></div><div class="match-col" id="matchR"></div></div>
+</div></div></section>
+
+<section><div class="num">9-mavzu</div><h2>Uzunlikni qanday o'lchaymiz</h2>
+<p class="lead"><span class="term c">Uzunlik</span> — Xalqaro birliklar sistemasida metrda (m) o'lchanadi. Slaydерни harakatlantirib qalam uzunligini "o'lchang".</p>
+<div class="sim"><div class="sim-head"><strong>Virtual chizg'ich</strong><span>Qalam uzunligi: <b id="lenOut" style="color:var(--amber)">8</b> sm</span></div><div class="sim-body">
+<div class="ruler-wrap"><div class="ruler-track" id="rulerTrack"><div class="ruler-obj" id="rulerObj"></div><div class="ruler-marker" id="rulerMark" data-v="8"></div></div></div>
+<input type="range" id="lenSlider" min="1" max="20" value="8">
+</div></div></section>
+
+<section><div class="num">10-mavzu</div><h2>Yuzani qanday o'lchaymiz?</h2>
+<p class="lead"><span class="term c">Yuza</span> — katakchalarni sanash orqali ham topish mumkin. Har bir katak 1 sm² ga teng. Katakchalarni bosib shaklni "bo'yang".</p>
+<div class="sim"><div class="sim-head"><strong>Katakchalab yuza hisoblash</strong><span>Reset</span></div><div class="sim-body">
+<div class="area-stat">Bo'yalgan yuza: <b id="areaOut">0</b> sm²</div>
+<div class="grid-wrap" id="areaGrid"></div>
+<div style="text-align:center"><button class="chip" id="areaReset">Tozalash</button></div>
+</div></div></section>
+
+<section><div class="num">11-mavzu</div><h2>Xatolar ustida ishlash</h2>
+<p class="lead">O'lchashda yo'l qo'yiladigan tipik xatolarni aniqlashni mashq qilaylik.</p>
+<div class="quiz-card"><p class="q">1. Chizg'ichni noldan emas, 1-chizig'idan boshlab o'lchasangiz natija qanday bo'ladi?</p>
+<button class="opt" data-c="false">Hech narsa o'zgarmaydi</button><button class="opt" data-c="true">1 sm ga noto'g'ri (xato) chiqadi</button><button class="opt" data-c="false">Natija aniqroq bo'ladi</button></div>
+<div class="quiz-card"><p class="q">2. Bir xil o'lchovni necha marta o'lchab, o'rtachasini olish nima uchun kerak?</p>
+<button class="opt" data-c="true">Tasodifiy xatoliklarni kamaytirish uchun</button><button class="opt" data-c="false">Vaqtni ko'proq sarflash uchun</button><button class="opt" data-c="false">Hech qanday foydasi yo'q</button></div>
+</section>
+
+<section><div class="num">Umumiy tekshiruv</div><h2>5 ta savol</h2>
+<p class="lead">Chorak bo'yicha bilimingizni tekshiring.</p>
+<div class="quiz-card"><p class="q">1. Muz suvga aylanishi qanday hodisa?</p>
+<button class="opt" data-c="true">Fizik hodisa</button><button class="opt" data-c="false">Kimyoviy hodisa</button><button class="opt" data-c="false">Biologik hodisa</button></div>
+<div class="quiz-card"><p class="q">2. Ilmiy metodning birinchi bosqichi nima?</p>
+<button class="opt" data-c="true">Kuzatish</button><button class="opt" data-c="false">Xulosa</button><button class="opt" data-c="false">Tajriba</button></div>
+<div class="quiz-card"><p class="q">3. Massani o'lchash uchun qaysi asbob ishlatiladi?</p>
+<button class="opt" data-c="false">Dinamometr</button><button class="opt" data-c="true">Tarozi</button><button class="opt" data-c="false">Termometr</button></div>
+<div class="quiz-card"><p class="q">4. XBS tizimida uzunlik birligi qaysi?</p>
+<button class="opt" data-c="false">Kilogramm</button><button class="opt" data-c="true">Metr</button><button class="opt" data-c="false">Sekund</button></div>
+<div class="quiz-card"><p class="q">5. Nega o'lchashda bir necha marta takrorlash tavsiya etiladi?</p>
+<button class="opt" data-c="true">Natija aniqroq bo'lishi uchun</button><button class="opt" data-c="false">Vaqtni behuda o'tkazish uchun</button><button class="opt" data-c="false">Qoidaga ko'ra shart emas</button></div>
+</section>
+
+</div>
+<footer>7-sinf fizika · I chorak — Taqvim-mavzu reja asosida</footer>
+
+<script>
+function chipGroup(id, data){
+  const row = document.getElementById(id), det = document.getElementById(id+'d');
+  data.forEach((d,i)=>{
+    const b = document.createElement('button'); b.className='chip'+(i===0?' active':''); b.textContent=d.t;
+    b.onclick=()=>{ row.querySelectorAll('.chip').forEach(c=>c.classList.remove('active')); b.classList.add('active'); det.innerHTML=d.h; };
+    row.appendChild(b);
+  });
+  det.innerHTML = data[0].h;
+}
+chipGroup('g1',[
+  {t:"Mexanik",h:"<b>Mexanik hodisa</b> — jismning harakati yoki tinch turishi. Misol: uloqtirilgan tosh, aylanayotgan g'ildirak."},
+  {t:"Issiqlik",h:"<b>Issiqlik hodisasi</b> — qizish, sovish, erish. Misol: choyning sovishi, muzning erishi."},
+  {t:"Elektr",h:"<b>Elektr hodisasi</b> — zaryadlarning harakati. Misol: chiroqning yonishi, chaqmoq."},
+  {t:"Yorug'lik",h:"<b>Yorug'lik hodisasi</b> — nurning tarqalishi, sinishi. Misol: kamalak, soyaning hosil bo'lishi."},
+]);
+chipGroup('g2',[
+  {t:"Kuzatish",h:"<b>Kuzatish</b> — tabiatdagi hodisani diqqat bilan o'rganish. Misol: olma daraxtdan tushishini ko'rish."},
+  {t:"Gipoteza",h:"<b>Gipoteza</b> — kuzatilgan hodisaga taxminiy izoh. Misol: \"Jismlar Yer tomon tortiladimi?\""},
+  {t:"Tajriba",h:"<b>Tajriba</b> — gipotezani tekshirish uchun o'lchov o'tkazish. Misol: turli jismlarni tashlab solishtirish."},
+  {t:"Xulosa",h:"<b>Xulosa</b> — tajriba natijasida qonuniyat shakllanadi. Misol: butun olam tortishish qonuni."},
+]);
+chipGroup('g3',[
+  {t:"Kuzatish",h:"Hodisalarni diqqat bilan kuzata olish — fizikaning boshlang'ich ko'nikmasi."},
+  {t:"O'lchash",h:"Asboblardan foydalanib aniq sonli natija olish ko'nikmasi."},
+  {t:"Hisoblash",h:"Formulalar yordamida natijalarni hisoblay olish."},
+  {t:"Tahlil qilish",h:"Olingan natijalarni izohlab, xulosa chiqara olish."},
+]);
+chipGroup('g4',[
+  {t:"Tarozi",h:"<b>Tarozi</b> — jismning massasini o'lchaydi (kg, g)."},
+  {t:"Shtangensirkul",h:"<b>Shtangensirkul</b> — kichik jismlarning uzunligini aniq o'lchaydi (mm)."},
+  {t:"Dinamometr",h:"<b>Dinamometr</b> — kuchni o'lchaydi (N)."},
+  {t:"Termometr",h:"<b>Termometr</b> — haroratni o'lchaydi (°C)."},
+  {t:"Menzurka",h:"<b>Menzurka</b> — suyuqlik hajmini o'lchaydi (ml, l)."},
+]);
+chipGroup('g6',[
+  {t:"Elektromagnetizm",h:"Elektromagnetizm kashfiyoti → elektr motorlari, generatorlar, smartfonlar."},
+  {t:"Yarimo'tkazgichlar",h:"Yarimo'tkazgichlar fizikasi → kompyuter protsessorlari, LED chiroqlar."},
+  {t:"Optika",h:"Yorug'lik fizikasi → ko'zoynak linzalari, mikroskop, kamera."},
+  {t:"Termodinamika",h:"Issiqlik fizikasi → muzlatgich, dvigatel, konditsioner."},
+]);
+
+// Section 5: scenario quiz
+const scenarios = [
+  {p:"Laboratoriyada kimyoviy moddani hidlab ko'rish mumkinmi?", correct:false},
+  {p:"Tajribadan so'ng qo'lni sovun bilan yuvish kerakmi?", correct:true},
+  {p:"O'qituvchi ruxsatisiz asboblarni ishlatish mumkinmi?", correct:false},
+];
+const scnWrap = document.getElementById('scnWrap');
+scenarios.forEach((s,i)=>{
+  const div = document.createElement('div'); div.className='scn';
+  div.innerHTML = `<p>${i+1}. ${s.p}</p><div class="btns"><button class="yes">Ha, mumkin/kerak</button><button class="no">Yo'q, mumkin emas</button></div><div class="fb"></div>`;
+  const [yesBtn, noBtn] = div.querySelectorAll('button');
+  const fb = div.querySelector('.fb');
+  const answer = (picked)=>{
+    yesBtn.disabled = noBtn.disabled = true;
+    const isRight = picked === s.correct;
+    fb.className = 'fb ' + (isRight ? 'ok' : 'bad');
+    fb.textContent = isRight ? "To'g'ri javob!" : "Noto'g'ri — qoidalarni yana bir bor eslang.";
+  };
+  yesBtn.onclick=()=>answer(true); noBtn.onclick=()=>answer(false);
+  scnWrap.appendChild(div);
+});
+
+// Section 7: toggle
+const g7d = document.getElementById('g7d');
+const g7texts = [
+  "Ko'z bilan baholaganda har bir inson natijani turlicha ko'radi — bu <b>noaniq</b> va xato ehtimoli yuqori usul.",
+  "Asbob (chizg'ich, tarozi) bilan o'lchaganda hamma uchun bir xil, <b>aniq va ishonchli</b> natija olinadi.",
+];
+g7d.innerHTML = g7texts[0];
+document.querySelectorAll('.toggle-row button').forEach(b=>{
+  b.onclick=()=>{ document.querySelectorAll('.toggle-row button').forEach(x=>x.classList.remove('active')); b.classList.add('active'); g7d.innerHTML = g7texts[b.dataset.m]; };
+});
+
+// Section 8: match game
+const pairs = [["Uzunlik","metr"],["Massa","kilogramm"],["Vaqt","sekund"],["Harorat","kelvin"]];
+const L = document.getElementById('matchL'), R = document.getElementById('matchR'), stat = document.getElementById('matchStat');
+const lefts = pairs.map(p=>p[0]); const rights = pairs.map(p=>p[1]).sort(()=>Math.random()-0.5);
+let selL=null, matched=0;
+lefts.forEach(t=>{ const d=document.createElement('div'); d.className='match-item'; d.textContent=t; d.onclick=()=>{ if(d.classList.contains('ok'))return; L.querySelectorAll('.match-item').forEach(x=>x.classList.remove('sel')); d.classList.add('sel'); selL=t; }; L.appendChild(d); });
+rights.forEach(t=>{ const d=document.createElement('div'); d.className='match-item'; d.textContent=t; d.onclick=()=>{ if(d.classList.contains('ok')||!selL)return; const correct = pairs.find(p=>p[0]===selL)[1]===t; if(correct){ d.classList.add('ok'); L.querySelector('.sel').classList.add('ok'); L.querySelector('.sel').classList.remove('sel'); matched++; stat.textContent=matched+' / 4'; selL=null; } else { d.style.borderColor='#E8735F'; setTimeout(()=>d.style.borderColor='',400); } }; R.appendChild(d); });
+
+// Section 9: ruler
+const lenSlider = document.getElementById('lenSlider'), lenOut = document.getElementById('lenOut'), rulerObj = document.getElementById('rulerObj'), rulerMark = document.getElementById('rulerMark');
+function updateRuler(){ const v = parseInt(lenSlider.value,10); lenOut.textContent=v; const pct = (v/20)*100; rulerObj.style.width = pct+'%'; rulerMark.style.left = pct+'%'; rulerMark.setAttribute('data-v', v); }
+lenSlider.addEventListener('input', updateRuler); updateRuler();
+
+// Section 10: area grid
+const grid = document.getElementById('areaGrid'), areaOut = document.getElementById('areaOut');
+let cells = [];
+for(let i=0;i<50;i++){ const c=document.createElement('div'); c.className='cell'; c.onclick=()=>{ c.classList.toggle('on'); areaOut.textContent = grid.querySelectorAll('.cell.on').length; }; grid.appendChild(c); cells.push(c); }
+document.getElementById('areaReset').onclick=()=>{ cells.forEach(c=>c.classList.remove('on')); areaOut.textContent=0; };
+
+// Quizzes
+document.querySelectorAll('.quiz-card').forEach(card=>{
+  const opts = card.querySelectorAll('.opt');
+  opts.forEach(opt=>{ opt.addEventListener('click', ()=>{ if(card.dataset.a) return; card.dataset.a='1';
+    opts.forEach(o=>{ if(o.dataset.c==='true') o.classList.add('correct'); else if(o===opt) o.classList.add('wrong'); }); }); });
+});
+</script>
+</body>
+</html>
